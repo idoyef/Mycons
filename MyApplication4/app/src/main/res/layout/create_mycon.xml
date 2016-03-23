@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pick a pic"
+        android:id="@+id/picAPicTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:textColor="#f90909"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:id="@+id/userImageView"
+        android:layout_below="@+id/picAPicTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose from library"
+        android:id="@+id/pickApicButton"
+        android:layout_below="@+id/userImageView"
+        android:layout_alignRight="@+id/userImageView"
+        android:layout_alignEnd="@+id/userImageView"
+        android:layout_marginTop="55dp" />
+</RelativeLayout>

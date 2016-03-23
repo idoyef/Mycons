@@ -30,8 +30,12 @@ public class MyconsKeyboard extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        Activity a;
+
         try {
-            keyboardListener = (KeyboardListener) context;
+            a= (Activity)context;
+            keyboardListener = (KeyboardListener) a;
         }
         catch (ClassCastException e)
         {
@@ -39,7 +43,8 @@ public class MyconsKeyboard extends Fragment {
         }
     }
 
-    /*
+
+/*
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -50,7 +55,8 @@ public class MyconsKeyboard extends Fragment {
         {
             throw new ClassCastException(activity.toString());
         }
-    }*/
+    }
+*/
 
     @Nullable
     @Override

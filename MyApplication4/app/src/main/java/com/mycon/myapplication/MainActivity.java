@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
             @Override
             public void onClick(View v) {
                 scsTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon, 0, 0, 0);
+
             }
         });
 
@@ -106,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
                     e.printStackTrace();
                 }
 
+                msgTxt.setText("");
+                scsTxt.setText("");
+                scsTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }
         });
 
