@@ -18,6 +18,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.style.IconMarginSpan;
 import android.text.style.ImageSpan;
@@ -31,12 +32,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Bitmap;
-
+import android.inputmethodservice.InputMethodService;
+import android.content.Intent;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity implements MyconsKeyboard.KeyboardListener{
 
@@ -66,7 +69,14 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
         myconBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+                SpannableStringBuilder builder = new SpannableStringBuilder();
+                builder.append(msgTxt.getText());
+             //   builder.replace(msgTxt.getSelectionStart(), msgTxt.getSelectionEnd(),R.mipmap.nicemycon );
+                Intent intent = new Intent();
+
                 scsTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon, 0, 0, 0);
+                msgTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon,0, 0, 0);
 
             }
         });
@@ -110,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
                 msgTxt.setText("");
                 scsTxt.setText("");
                 scsTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                msgTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }
         });
 
