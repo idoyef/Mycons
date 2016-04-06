@@ -19,6 +19,10 @@ import android.widget.ImageButton;
 
 public class MyconsKeyboard extends Fragment {
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     private static ImageButton image_button;
     KeyboardListener keyboardListener;
