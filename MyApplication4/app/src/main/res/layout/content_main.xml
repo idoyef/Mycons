@@ -93,6 +93,7 @@
         android:id="@+id/createButton"
         android:layout_alignBottom="@+id/SendButton"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"/>
 
 </RelativeLayout>
