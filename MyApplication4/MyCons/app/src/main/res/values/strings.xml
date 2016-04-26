@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyCons</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome">Welcome</string>
+    <string name="whatDo">What do you want to do?</string>
+    <string name="createButton">create MyCons</string>
+
+</resources>

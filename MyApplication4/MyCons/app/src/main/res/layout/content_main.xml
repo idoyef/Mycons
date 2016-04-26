@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.mycons_web.mycons.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:focusableInTouchMode="false">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/welcome"
+        android:id="@+id/WelcomeTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Mycons"
+        android:id="@+id/createMyconsButton"
+        android:layout_below="@+id/WhatDoTextView"
+        android:layout_marginTop="37dp"
+        android:layout_alignLeft="@+id/sendByMyconsButton"
+        android:layout_alignStart="@+id/sendByMyconsButton"
+        android:layout_alignRight="@+id/sendByMyconsButton"
+        android:layout_alignEnd="@+id/sendByMyconsButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendByMyconsButton"
+        android:layout_below="@+id/createMyconsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:text="send message by Mycons" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/whatDo"
+        android:id="@+id/WhatDoTextView"
+        android:layout_below="@+id/WelcomeTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="38dp"
+        android:layout_alignParentStart="false"
+        android:gravity="center_vertical" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendByOtherButton"
+        android:layout_marginTop="46dp"
+        android:text="send message by other"
+        android:layout_below="@+id/sendByMyconsButton"
+        android:layout_alignLeft="@+id/sendByMyconsButton"
+        android:layout_alignStart="@+id/sendByMyconsButton"
+        android:layout_alignRight="@+id/sendByMyconsButton"
+        android:layout_alignEnd="@+id/sendByMyconsButton" />
+</RelativeLayout>
