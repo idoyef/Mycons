@@ -8,5 +8,12 @@
         android:layout_width="91dp"
         android:layout_height="98dp"
         android:id="@+id/MyconButtonNumber1"
-        android:src="@android:mipmap/sym_def_app_icon" />
+        android:src="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:layout_width="97dp"
+        android:layout_height="92dp"
+        android:id="@+id/MyconButtonNumber2"
+        android:src="@drawable/abc_btn_check_to_on_mtrl_000" />
+
 </LinearLayout>
