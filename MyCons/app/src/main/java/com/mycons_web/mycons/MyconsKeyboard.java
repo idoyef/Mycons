@@ -28,8 +28,12 @@ public class MyconsKeyboard extends Activity {
                 msgTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon,0, 0, 0);
 */
 
+/*
                 Intent backToSendMessageIntent = new Intent(MyconsKeyboard.this,SendMessage.class);
                 startActivity(backToSendMessageIntent);
+*/
+                finish();
+//                putMyconInTextMsg(myconImageButtonNumber1);
 
             }
         });
