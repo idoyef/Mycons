@@ -1,18 +1,26 @@
 package com.mycons_web.mycons;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
+import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
+import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,7 +60,8 @@ public class SendMessage  extends Activity {
 */
 
                 Intent openMyconsKeyboardIntent = new Intent(SendMessage.this, MyconsKeyboard.class);
-                startActivity(openMyconsKeyboardIntent);
+                //startActivity(openMyconsKeyboardIntent);
+                startActivityForResult(openMyconsKeyboardIntent, 1025);
 
             }
         });
@@ -127,4 +136,31 @@ public class SendMessage  extends Activity {
             }
         });
     }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1025) {
+            if(resultCode == RESULT_OK) {
+                //msgTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon,0, 0, 0);
+                SpannableStringBuilder ssb= new SpannableStringBuilder(scsTxt.getText());
+                SpannableStringBuilder ssbMsg= new SpannableStringBuilder(msgTxt.getText());
+              //  Bitmap currentMycon = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
+             //   Bitmap currentMycon = BitmapFactory.decodeResource(getResources(),data.getIntExtra("result",R.mipmap.ic_launcher));
+                Bitmap currentMycon = (Bitmap) data.getParcelableExtra("result");
+                 ssb.append(" ", new ImageSpan(this.getBaseContext(),currentMycon),0);
+
+                scsTxt.setText(ssb);
+                msgTxt.setText(ssb);
+               // ImageButton imgRes = (ImageButton) findViewById(data.getIntExtra("result",R.mipmap.nicemycon));
+//                Bitmap currentMycon = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
+//                ssb.setSpan(new ImageSpan(this.getBaseContext(),currentMycon),(int)scsTxt.getRotationX(),(int)scsTxt.getRotationY(),Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                ssbMsg.setSpan(new ImageSpan(this.getBaseContext(),currentMycon),(int)msgTxt.getRotationX(),(int)msgTxt.getRotationY(),Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                scsTxt.setText(ssb, TextView.BufferType.SPANNABLE);
+//                msgTxt.setText(ssb, TextView.BufferType.SPANNABLE);
+            }
+        }
+
+    }
+
 }

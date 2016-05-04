@@ -45,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:bufferType="spannable"
                 android:textSize="@dimen/abc_action_bar_progress_bar_size"
                 android:id="@+id/textViewToChange"
                 android:singleLine="false"
