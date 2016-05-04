@@ -1,27 +1,14 @@
 package com.mycon.myapplication;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
-import android.text.style.IconMarginSpan;
-import android.text.style.ImageSpan;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,63 +16,83 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Bitmap;
-import android.inputmethodservice.InputMethodService;
-import android.content.Intent;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
+import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 
-public class MainActivity extends AppCompatActivity implements MyconsKeyboard.KeyboardListener{
+public class MainActivity extends AppCompatActivity implements MyconsKeyboard.KeyboardListener {
 
     EditText msgTxt;
     TextView scsTxt;
     ImageView iv;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+    private static final String TAG = "LogMessage";
 
     @Override
     public void PutMyconInTextView(ImageButton imageButton) {
         scsTxt.setText("scs!");
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Log.i(TAG, "onCreate-MainActivity");
+
         msgTxt = (EditText) findViewById(R.id.msgTextBox);
         scsTxt = (TextView) findViewById(R.id.textViewToChange);
-        iv = (ImageView)findViewById(R.id.imageTxt);
+        iv = (ImageView) findViewById(R.id.imageTxt);
         Button myconBtn = (Button) findViewById(R.id.myconButton);
+        Button createBtn = (Button) findViewById(R.id.createButton);
         Button sndBtn = (Button) findViewById(R.id.SendButton);
 
-        myconBtn.setOnClickListener(new View.OnClickListener(){
+        myconBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 SpannableStringBuilder builder = new SpannableStringBuilder();
                 builder.append(msgTxt.getText());
-             //   builder.replace(msgTxt.getSelectionStart(), msgTxt.getSelectionEnd(),R.mipmap.nicemycon );
-                Intent intent = new Intent();
+                //   builder.replace(msgTxt.getSelectionStart(), msgTxt.getSelectionEnd(),R.mipmap.nicemycon );
+                //Intent intent = new Intent(this, CreateMycon.class);
+
 
                 scsTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon, 0, 0, 0);
-                msgTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon,0, 0, 0);
+                msgTxt.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.nicemycon, 0, 0, 0);
 
             }
         });
 
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onCreate-createBtn");
+                Toast.makeText(MainActivity.this, "Button Create clicked!", Toast.LENGTH_LONG).show();
+                Log.i(TAG, "onCreate-createBtn2");
+                startActivity(new Intent(MainActivity.this, CreateMycon.class));
+                Log.i(TAG, "onCreate-createBtn3");
+            }
+        });
 
         sndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 scsTxt.setDrawingCacheEnabled(true); // Enable drawing cache before calling the getDrawingCache() method
                 scsTxt.setTextColor(Color.BLACK);
                 scsTxt.setBackgroundColor(Color.TRANSPARENT);
@@ -100,20 +107,17 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
                 iv.setMaxWidth(800);
                 iv.setImageBitmap(msgImage);
 
-                try
-                {
-                   // Image imageFromText =
-                   // IconMarginSpan icon = new IconMarginSpan(msgImage);
-                    File file =new File("//storage//emulated/0//Mycons//", String.format(System.currentTimeMillis()+".jpg"));
+                try {
+                    // Image imageFromText =
+                    // IconMarginSpan icon = new IconMarginSpan(msgImage);
+                    File file = new File("//storage//emulated/0//Mycons//", String.format(System.currentTimeMillis() + ".jpg"));
                     FileOutputStream ostream1 = new FileOutputStream(file);
                     iv.draw(c);
                     scsTxt.draw(c);
                     boolean scs = msgImage.compress(Bitmap.CompressFormat.JPEG, 99, ostream1);
                     ostream1.close();
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
 
             }
         });
+
         msgTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -153,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
 
             }
         });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -175,6 +183,46 @@ public class MainActivity extends AppCompatActivity implements MyconsKeyboard.Ke
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.mycon.myapplication/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.mycon.myapplication/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 
 
